@@ -1,91 +1,105 @@
-import { Button } from "@/components/ui/button";
-import { Menu, Search } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full bg-card/95 backdrop-blur-sm border-b border-border z-50">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-2xl font-bold text-primary-foreground">L</span>
-            </div>
-            <span className="text-2xl font-bold text-foreground">Luppa</span>
+    <header className="fixed top-0 left-0 w-full bg-white shadow-md z-[1000]">
+      <div className="max-w-[1100px] mx-auto px-5 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center gap-2.5 font-semibold text-lg">
+          <div className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#04B0F5] to-[#3883A0] text-white font-bold flex items-center justify-center">
+            L
           </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#eventos" className="text-foreground hover:text-primary transition-colors">
-              Eventos
-            </a>
-            <a href="#categorias" className="text-foreground hover:text-primary transition-colors">
-              Categorias
-            </a>
-            <a href="#organizadores" className="text-foreground hover:text-primary transition-colors">
-              Organizadores
-            </a>
-            <a href="#contato" className="text-foreground hover:text-primary transition-colors">
-              Contato
-            </a>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon">
-              <Search className="w-5 h-5" />
-            </Button>
-            <Button variant="default" className="bg-primary hover:bg-primary/90">
-              Cadastrar Evento
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+          <span className="text-[#2C3133]">Luppa</span>
         </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden pt-4 pb-2 space-y-3 animate-fade-in">
-            <a
-              href="#eventos"
-              className="block py-2 text-foreground hover:text-primary transition-colors"
-            >
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-6 list-none">
+          <li>
+            <a href="#home" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Início
+            </a>
+          </li>
+          <li>
+            <a href="#events" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
               Eventos
             </a>
-            <a
-              href="#categorias"
-              className="block py-2 text-foreground hover:text-primary transition-colors"
-            >
-              Categorias
+          </li>
+          <li>
+            <a href="#map" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Mapa
             </a>
-            <a
-              href="#organizadores"
-              className="block py-2 text-foreground hover:text-primary transition-colors"
-            >
-              Organizadores
+          </li>
+          <li>
+            <a href="#create" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Cadastrar
             </a>
-            <a
-              href="#contato"
-              className="block py-2 text-foreground hover:text-primary transition-colors"
-            >
+          </li>
+          <li>
+            <a href="#about" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Sobre
+            </a>
+          </li>
+          <li>
+            <a href="#contact" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
               Contato
             </a>
-            <Button variant="default" className="w-full bg-primary hover:bg-primary/90">
-              Cadastrar Evento
-            </Button>
-          </div>
-        )}
+          </li>
+        </ul>
+
+        {/* Login Button */}
+        <button className="hidden md:block bg-[#04B0F5] text-white border-none rounded-[30px] px-[18px] py-2 cursor-pointer text-sm transition-colors hover:bg-[#269CCA]">
+          Login
+        </button>
+
+        {/* Mobile Menu Toggle */}
+        <div 
+          className="md:hidden flex flex-col gap-1 cursor-pointer"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span className={`w-[25px] h-[3px] bg-[#2C3133] rounded-[5px] transition-all ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}></span>
+          <span className={`w-[25px] h-[3px] bg-[#2C3133] rounded-[5px] transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`w-[25px] h-[3px] bg-[#2C3133] rounded-[5px] transition-all ${isMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}></span>
+        </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <ul className="md:hidden absolute top-[60px] left-0 right-0 flex-col bg-white text-center flex p-[15px_0] border-t border-[#eee]">
+          <li className="py-2">
+            <a href="#home" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Início
+            </a>
+          </li>
+          <li className="py-2">
+            <a href="#events" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Eventos
+            </a>
+          </li>
+          <li className="py-2">
+            <a href="#map" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Mapa
+            </a>
+          </li>
+          <li className="py-2">
+            <a href="#create" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Cadastrar
+            </a>
+          </li>
+          <li className="py-2">
+            <a href="#about" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Sobre
+            </a>
+          </li>
+          <li className="py-2">
+            <a href="#contact" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Contato
+            </a>
+          </li>
+        </ul>
+      )}
+    </header>
   );
 };
 
