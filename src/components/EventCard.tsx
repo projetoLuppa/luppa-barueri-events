@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, MapPin, Users } from "lucide-react";
+import EventDetailsModal from "./EventDetailsModal";
 
 interface EventCardProps {
   title: string;
@@ -9,9 +11,16 @@ interface EventCardProps {
   attendees: number;
   image: string;
   category: string;
+  description: string;
+  images: string[];
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
 }
 
-const EventCard = ({ title, date, location, attendees, image, category }: EventCardProps) => {
+const EventCard = ({ title, date, location, attendees, image, category, description, images, coordinates }: EventCardProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <Card className="overflow-hidden hover-lift shadow-card hover:shadow-hover transition-all duration-300 group">
       <div className="relative h-56 overflow-hidden">
@@ -47,10 +56,19 @@ const EventCard = ({ title, date, location, attendees, image, category }: EventC
           </div>
         </div>
 
-        <Button className="w-full bg-primary hover:bg-primary/90 rounded-full">
+        <Button 
+          className="w-full bg-primary hover:bg-primary/90 rounded-full"
+          onClick={() => setIsModalOpen(true)}
+        >
           Ver Detalhes
         </Button>
       </CardContent>
+
+      <EventDetailsModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        event={{ title, date, location, attendees, category, description, images, coordinates }}
+      />
     </Card>
   );
 };

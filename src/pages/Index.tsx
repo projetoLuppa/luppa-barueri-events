@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import EventCard from "@/components/EventCard";
 import CategoryCard from "@/components/CategoryCard";
 import Footer from "@/components/Footer";
-import Map from "@/components/Map";
 import { Music, Utensils, Palette, Trophy } from "lucide-react";
 import eventMusic from "@/assets/event-music.jpg";
 import eventGastronomy from "@/assets/event-gastronomy.jpg";
@@ -19,6 +18,9 @@ const Index = () => {
       attendees: 324,
       image: eventMusic,
       category: "Música",
+      description: "Um festival imperdível com os melhores artistas de jazz da região. Traga sua família e amigos para curtir uma noite mágica ao ar livre com música ao vivo, food trucks e muito mais. O evento conta com artistas locais e nacionais.",
+      images: [eventMusic, eventMusic, eventMusic],
+      coordinates: { lat: -23.5106, lng: -46.8767 }
     },
     {
       title: "Festival Gastronômico de Barueri",
@@ -27,6 +29,9 @@ const Index = () => {
       attendees: 567,
       image: eventGastronomy,
       category: "Gastronomia",
+      description: "Descubra os sabores de Barueri! Festival com os melhores restaurantes e chefs da cidade. Workshops de culinária, demonstrações ao vivo e degustações de pratos incríveis. Uma experiência gastronômica única para toda a família.",
+      images: [eventGastronomy, eventGastronomy, eventGastronomy],
+      coordinates: { lat: -23.5120, lng: -46.8750 }
     },
     {
       title: "Exposição de Arte Contemporânea",
@@ -35,6 +40,9 @@ const Index = () => {
       attendees: 189,
       image: eventCulture,
       category: "Cultura",
+      description: "Exposição com obras de artistas contemporâneos locais e nacionais. Uma jornada pela arte moderna com pinturas, esculturas e instalações interativas. Entrada gratuita com visitas guiadas disponíveis.",
+      images: [eventCulture, eventCulture, eventCulture],
+      coordinates: { lat: -23.5090, lng: -46.8780 }
     },
     {
       title: "Corrida Solidária 5K",
@@ -43,6 +51,9 @@ const Index = () => {
       attendees: 421,
       image: eventSports,
       category: "Esportes",
+      description: "Corrida solidária em prol de instituições de caridade locais. Percurso de 5km pelo belo Parque Ecológico. Inscrições abertas para todas as idades. Kit participante inclui camiseta, medalha e muito mais!",
+      images: [eventSports, eventSports, eventSports],
+      coordinates: { lat: -23.5080, lng: -46.8800 }
     },
   ];
 
@@ -118,23 +129,6 @@ const Index = () => {
                 <CategoryCard {...category} />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section id="mapa" className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Eventos em Barueri
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Veja onde os eventos estão acontecendo
-            </p>
-          </div>
-          <div className="animate-fade-in">
-            <Map />
           </div>
         </div>
       </section>
