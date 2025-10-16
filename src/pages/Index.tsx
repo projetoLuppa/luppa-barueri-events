@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import EventCard from "@/components/EventCard";
 import CategoryCard from "@/components/CategoryCard";
 import Footer from "@/components/Footer";
+import Map from "@/components/Map";
 import { Music, Utensils, Palette, Trophy } from "lucide-react";
 import eventMusic from "@/assets/event-music.jpg";
 import eventGastronomy from "@/assets/event-gastronomy.jpg";
@@ -117,6 +118,23 @@ const Index = () => {
                 <CategoryCard {...category} />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section id="mapa" className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Eventos em Barueri
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Veja onde os eventos estão acontecendo
+            </p>
+          </div>
+          <div className="animate-fade-in">
+            <Map />
           </div>
         </div>
       </section>
