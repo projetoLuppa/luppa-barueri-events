@@ -1,10 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Calendar, MapPin, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { useState } from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
 
 interface EventDetailsModalProps {
   open: boolean;
@@ -25,20 +21,6 @@ interface EventDetailsModalProps {
 }
 
 const EventDetailsModal = ({ open, onOpenChange, event }: EventDetailsModalProps) => {
-  const [apiKey, setApiKey] = useState('');
-  const [showMap, setShowMap] = useState(false);
-
-  const mapContainerStyle = {
-    width: '100%',
-    height: '300px',
-    borderRadius: '12px'
-  };
-
-  const handleShowMap = () => {
-    if (apiKey.trim()) {
-      setShowMap(true);
-    }
-  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -95,55 +77,27 @@ const EventDetailsModal = ({ open, onOpenChange, event }: EventDetailsModalProps
           {/* Map */}
           <div>
             <h3 className="text-xl font-semibold mb-4">Localização</h3>
-            {!showMap ? (
-              <div className="bg-card p-6 rounded-lg border">
-                <p className="text-muted-foreground mb-4">
-                  Para visualizar o mapa, insira sua chave da API do Google Maps.
-                  <a 
-                    href="https://developers.google.com/maps/documentation/javascript/get-api-key" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-primary ml-1 underline"
-                  >
-                    Obter chave da API
-                  </a>
-                </p>
-                <div className="flex gap-2">
-                  <Input
-                    type="text"
-                    placeholder="Cole sua chave da API do Google Maps"
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                    className="flex-1"
-                  />
-                  <Button onClick={handleShowMap}>Mostrar Mapa</Button>
-                </div>
-              </div>
-            ) : (
-              <LoadScript googleMapsApiKey={apiKey}>
-                <GoogleMap
-                  mapContainerStyle={mapContainerStyle}
-                  center={event.coordinates}
-                  zoom={15}
-                  options={{
-                    styles: [
-                      {
-                        featureType: "all",
-                        elementType: "geometry",
-                        stylers: [{ color: "#f5f5f5" }]
-                      },
-                      {
-                        featureType: "water",
-                        elementType: "geometry",
-                        stylers: [{ color: "#04B0f5" }]
-                      }
-                    ]
-                  }}
+            <div className="rounded-lg overflow-hidden border">
+              <iframe
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${event.coordinates.lng-0.01},${event.coordinates.lat-0.01},${event.coordinates.lng+0.01},${event.coordinates.lat+0.01}&layer=mapnik&marker=${event.coordinates.lat},${event.coordinates.lng}`}
+              />
+              <div className="bg-card p-2 text-sm text-center border-t">
+                <a 
+                  href={`https://www.openstreetmap.org/?mlat=${event.coordinates.lat}&mlon=${event.coordinates.lng}#map=15/${event.coordinates.lat}/${event.coordinates.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
                 >
-                  <Marker position={event.coordinates} />
-                </GoogleMap>
-              </LoadScript>
-            )}
+                  Ver mapa completo
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </DialogContent>
