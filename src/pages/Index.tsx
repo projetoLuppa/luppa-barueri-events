@@ -13,6 +13,7 @@ import eventSports from "@/assets/event-sports.jpg";
 
 const Index = () => {
   const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const upcomingEvents = [
     {
       title: "Festival de Jazz ao Ar Livre",
@@ -87,6 +88,19 @@ const Index = () => {
     },
   ];
 
+  const filteredEvents = selectedCategory
+    ? upcomingEvents.filter(event => {
+        if (selectedCategory === "Arte & Cultura") {
+          return event.category === "Cultura";
+        }
+        return event.category === selectedCategory;
+      })
+    : upcomingEvents;
+
+  const handleCategoryClick = (categoryTitle: string) => {
+    setSelectedCategory(selectedCategory === categoryTitle ? null : categoryTitle);
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -100,16 +114,34 @@ const Index = () => {
               Próximos Eventos
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Descubra experiências incríveis acontecendo agora em Barueri
+              {selectedCategory 
+                ? `Eventos de ${selectedCategory}` 
+                : "Descubra experiências incríveis acontecendo agora em Barueri"}
             </p>
+            {selectedCategory && (
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className="mt-4 text-sm text-primary hover:underline"
+              >
+                Limpar filtro
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {upcomingEvents.map((event, index) => (
-              <div key={index} className="animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <EventCard {...event} />
+            {filteredEvents.length > 0 ? (
+              filteredEvents.map((event, index) => (
+                <div key={index} className="animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <EventCard {...event} />
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-lg text-muted-foreground">
+                  Nenhum evento encontrado nesta categoria.
+                </p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -129,7 +161,11 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => (
               <div key={index} className="animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <CategoryCard {...category} />
+                <CategoryCard 
+                  {...category} 
+                  onClick={() => handleCategoryClick(category.title)}
+                  isActive={selectedCategory === category.title}
+                />
               </div>
             ))}
           </div>
