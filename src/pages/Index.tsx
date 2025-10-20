@@ -90,7 +90,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
+      <Hero onCreateEvent={() => setIsCreateEventModalOpen(true)} />
 
       {/* Upcoming Events Section */}
       <section id="eventos" className="py-20 bg-background">

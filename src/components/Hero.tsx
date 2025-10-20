@@ -1,6 +1,10 @@
 import heroImage from "@/assets/hero-event.jpg";
 
-const Hero = () => {
+interface HeroProps {
+  onCreateEvent: () => void;
+}
+
+const Hero = ({ onCreateEvent }: HeroProps) => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20">
       {/* Background Image with Overlay */}
@@ -34,7 +38,10 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="inline-flex items-center justify-center gap-2 text-lg px-8 py-6 rounded-full font-medium cursor-pointer border-none bg-[hsl(204,100%,48%)] text-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] transition-all hover:bg-[hsla(204,100%,48%,0.9)] hover:-translate-y-0.5 hover:shadow-[0_10px_15px_-3px_rgba(0,0,0,0.2)]">
+            <a 
+              href="#eventos"
+              className="inline-flex items-center justify-center gap-2 text-lg px-8 py-6 rounded-full font-medium cursor-pointer border-none bg-[hsl(204,100%,48%)] text-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] transition-all hover:bg-[hsla(204,100%,48%,0.9)] hover:-translate-y-0.5 hover:shadow-[0_10px_15px_-3px_rgba(0,0,0,0.2)] no-underline"
+            >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -42,8 +49,11 @@ const Hero = () => {
                 <line x1="3" y1="10" x2="21" y2="10"></line>
               </svg>
               Explorar Eventos
-            </button>
-            <button className="inline-flex items-center justify-center gap-2 text-lg px-8 py-6 rounded-full font-medium cursor-pointer border-2 border-white text-white bg-transparent backdrop-blur-sm transition-all hover:bg-[hsla(0,0%,100%,0.1)]">
+            </a>
+            <button 
+              onClick={onCreateEvent}
+              className="inline-flex items-center justify-center gap-2 text-lg px-8 py-6 rounded-full font-medium cursor-pointer border-2 border-white text-white bg-transparent backdrop-blur-sm transition-all hover:bg-[hsla(0,0%,100%,0.1)]"
+            >
               Cadastrar Evento
             </button>
           </div>
