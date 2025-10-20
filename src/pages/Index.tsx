@@ -1,8 +1,10 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import EventCard from "@/components/EventCard";
 import CategoryCard from "@/components/CategoryCard";
 import Footer from "@/components/Footer";
+import CreateEventModal from "@/components/CreateEventModal";
 import { Music, Utensils, Palette, Trophy } from "lucide-react";
 import eventMusic from "@/assets/event-music.jpg";
 import eventGastronomy from "@/assets/event-gastronomy.jpg";
@@ -10,6 +12,7 @@ import eventCulture from "@/assets/event-culture.jpg";
 import eventSports from "@/assets/event-sports.jpg";
 
 const Index = () => {
+  const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
   const upcomingEvents = [
     {
       title: "Festival de Jazz ao Ar Livre",
@@ -143,12 +146,16 @@ const Index = () => {
             Alcance milhares de pessoas em Barueri e região. 
             Cadastre seu evento de forma rápida e gratuita.
           </p>
-          <button className="bg-card text-primary hover:bg-card/90 px-8 py-4 rounded-full text-lg font-semibold shadow-hover hover-lift transition-all">
+          <button 
+            onClick={() => setIsCreateEventModalOpen(true)}
+            className="bg-card text-primary hover:bg-card/90 px-8 py-4 rounded-full text-lg font-semibold shadow-hover hover-lift transition-all"
+          >
             Cadastrar Meu Evento
           </button>
         </div>
       </section>
 
+      <CreateEventModal open={isCreateEventModalOpen} onOpenChange={setIsCreateEventModalOpen} />
       <Footer />
     </div>
   );

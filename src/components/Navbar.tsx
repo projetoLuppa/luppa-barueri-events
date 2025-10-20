@@ -1,7 +1,9 @@
 import { useState } from "react";
+import LoginModal from "./LoginModal";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-[1000]">
@@ -22,34 +24,22 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#events" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+            <a href="#eventos" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
               Eventos
             </a>
           </li>
           <li>
-            <a href="#map" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Mapa
-            </a>
-          </li>
-          <li>
-            <a href="#create" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Cadastrar
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Sobre
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Contato
+            <a href="#categorias" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Categorias
             </a>
           </li>
         </ul>
 
         {/* Login Button */}
-        <button className="hidden md:block bg-[#04B0F5] text-white border-none rounded-[30px] px-[18px] py-2 cursor-pointer text-sm transition-colors hover:bg-[#269CCA]">
+        <button 
+          onClick={() => setIsLoginModalOpen(true)}
+          className="hidden md:block bg-[#04B0F5] text-white border-none rounded-[30px] px-[18px] py-2 cursor-pointer text-sm transition-colors hover:bg-[#269CCA]"
+        >
           Login
         </button>
 
@@ -73,32 +63,27 @@ const Navbar = () => {
             </a>
           </li>
           <li className="py-2">
-            <a href="#events" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+            <a href="#eventos" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
               Eventos
             </a>
           </li>
           <li className="py-2">
-            <a href="#map" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Mapa
+            <a href="#categorias" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
+              Categorias
             </a>
           </li>
           <li className="py-2">
-            <a href="#create" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Cadastrar
-            </a>
-          </li>
-          <li className="py-2">
-            <a href="#about" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Sobre
-            </a>
-          </li>
-          <li className="py-2">
-            <a href="#contact" className="no-underline text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]">
-              Contato
-            </a>
+            <button 
+              onClick={() => setIsLoginModalOpen(true)}
+              className="text-[#2C3133] text-sm font-medium transition-colors hover:text-[#04B0F5]"
+            >
+              Login
+            </button>
           </li>
         </ul>
       )}
+
+      <LoginModal open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen} />
     </header>
   );
 };
